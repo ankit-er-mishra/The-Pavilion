@@ -19,9 +19,9 @@ performance across years.
 
 ## API 🌐
 
-Entity Sport Cricket API — IPL 2026 squad info,
-  player profiles, match schedules -
-  (https://cricket.entitysport.com).
+- CricAPI — IPL matches,
+  player search, match info
+  (https://cricapi.com) — Free, 100,000 calls/hour
 
 IPL Dataset 2008–2025 — Historical match data,
   player stats, team performance
