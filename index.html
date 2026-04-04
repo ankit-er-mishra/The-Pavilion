@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPL Stats Hub 🏏</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link
@@ -25,6 +25,11 @@
             <li><a href="players.html">PLAYERS</a></li>
             <li><a href="records.html">RECORDS</a></li>
         </ul>
+
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-button"></i>
+            <input type="text" placeholder="Search Players..." id="search-input">
+        </div>
 
         <button id="thm-toggle">
             <i class="fa-solid fa-moon"></i>
@@ -48,7 +53,11 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; The Pavilion</p>
+    </footer>
+
+    <script src="index.js"></script>
 </body>
 
 </html>
