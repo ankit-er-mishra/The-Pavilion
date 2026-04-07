@@ -13,6 +13,19 @@
     --navbar-text: #2c2828;
 }
 
+body.dark-mode {
+    --primary: #1a1a2e;
+    --secondary: #16213e;
+    --accent: #9b59b6;
+    --accent-light: #f39c12;
+    --text-primary: #eaeaea;
+    --text-secondary: #aaaaaa;
+    --card-bg: #1e1e3f;
+    --border: #2a2a5a;
+    --navbar-bg: #0f3460;
+    --navbar-text: #eaeaea;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -66,7 +79,6 @@ body{
 }
 
 .navbar .nav-links li a:hover {
-    color: rgb(78, 21, 21);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     
 }
@@ -110,7 +122,7 @@ body{
 .navbar .search-button{
     background-color: transparent;
     border: none;
-    color: var(--navbar-text);
+    color: rgb(14, 11, 19);
     font-size: 1.2rem;
 }
 
@@ -283,6 +295,56 @@ section h2 {
     margin-bottom: 14px;
     color: var(--text-primary);
 }
+
+
+/* Teams Page */
+.teams-section {
+    margin: 30px 20px;
+}
+
+.teams-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+#teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.team-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.team-logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.team-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+}
+
+.team-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
 
 
 

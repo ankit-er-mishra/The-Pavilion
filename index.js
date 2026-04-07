@@ -54,7 +54,7 @@ function parseCSV(text) {
 
 
 function getStats(matches) {
-    // Total matches, seasons, teams
+    
     const totalMatches = matches.length;
     const seasons = new Set(matches.map(m => m.match_date.split('-')[0]));
     const teams = new Set();
@@ -186,6 +186,14 @@ fetchData().then(text => {
     console.log('Trophies:', getTrophies(matches));
 });
 
+/////////////
+///////////
+/////////
+///////
+/////
+///
+//
+
 
 async function init() {
     const text = await fetchData();
@@ -221,7 +229,7 @@ function renderStats(stats) {
 function renderTopPlayers(players) {
     document.getElementById('players-container').innerHTML = players.map((player, index) => `
         <div class="player-card">
-            <span class="rank">#${index + 1}</span>
+            <span class="rank">${index + 1}</span>
             <span class="name">${player.name}</span>
             <span class="awards">${player.awards} awards</span>
         </div>
@@ -231,13 +239,24 @@ function renderTopPlayers(players) {
 function renderTopTeams(teams, trophies) {
     document.getElementById('teams-container').innerHTML = teams.map((team, index) => `
         <div class="team-card">
-            <span class="rank">#${index + 1}</span>
+            <span class="rank">${index + 1}</span>
             <span class="name">${team.name}</span>
             <span class="wins">${team.wins} wins</span>
             <span class="trophies">🏆 ${trophies[team.name] || 0}</span>
         </div>
     `).join('');
 }
+
+
+document.getElementById('thm-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = document.querySelector('#thm-toggle i');
+    if (document.body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+    }
+});
 
 
 init();

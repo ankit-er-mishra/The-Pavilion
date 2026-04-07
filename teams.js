@@ -1,120 +1,145 @@
-const CSV_URL = "https://raw.githubusercontent.com/ritesh-ojha/IPL-DATASET/main/csv/Match_Info.csv"
+const CSV_URL = "https://raw.githubusercontent.com/ritesh-ojha/IPL-DATASET/main/csv/Match_Info.csv";
 
-
-function showLoading(containerId) {
-    const el = document.getElementById(containerId)
-    if (!el) return
-
-    el.innerHTML = `
-        <div class="loading">
-            <div class="spinner"></div>
-            <p>Loading...</p>
-        </div>
-    `
+async function fetchData() {
+    const response = await fetch(CSV_URL);
+    const text = await response.text();
+    return text;
 }
 
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',');
 
-function parseCSV(csv) {
-    const lines = csv.trim().split('\n')
-    const headers = lines[0].split(',')
+    const matches = [];
 
-    return lines.slice(1).map(line => {
-        const values = line.split(',')
-        const obj = {}
+    for (let i = 1; i < lines.length; i++) {
+        const values = [];
+        let current = '';
+        let insideQuotes = false;
 
-        headers.forEach((header, i) => {
-            obj[header.trim()] = values[i]?.trim()
-        })
-
-        return obj
-    })
-}
-
-
-async function loadTeamsPage() {
-    showLoading('teams-page-container')
-
-    try {
-        let data
-
-        const cached = localStorage.getItem('iplData')
-        if (cached) {
-            data = JSON.parse(cached)
-        } else {
-            const res = await fetch(CSV_URL)
-
-            if (!res.ok) throw new Error("API Error")
-
-            const csv = await res.text()
-            data = parseCSV(csv)
-
-            localStorage.setItem('iplData', JSON.stringify(data))
+        for (let char of lines[i]) {
+            if (char === '"') {
+                insideQuotes = !insideQuotes;
+            } else if (char === ',' && !insideQuotes) {
+                values.push(current.trim());
+                current = '';
+            } else {
+                current += char;
+            }
         }
+        values.push(current.trim());
 
-        displayTeams(data)
+        const match = {};
+        headers.forEach((header, index) => {
+            match[header.trim()] = values[index] || '';
+        });
 
-    } catch (err) {
-        console.error(err)
-        document.getElementById('teams-page-container').innerHTML =
-            `<p style="color:red;">Error loading teams</p>`
+        matches.push(match);
     }
+
+    return matches;
 }
 
+function getTeamStats(matches) {
+    const teams = {};
 
-function displayTeams(data) {
-    const container = document.getElementById('teams-page-container')
-    if (!container) return
-
-    const teamStats = {}
-
-    data.forEach(match => {
-        const t1 = match.team1
-        const t2 = match.team2
-        const winner = match.winner
-
-        if (!teamStats[t1]) teamStats[t1] = { matches: 0, wins: 0 }
-        if (!teamStats[t2]) teamStats[t2] = { matches: 0, wins: 0 }
-
-        teamStats[t1].matches++
-        teamStats[t2].matches++
-
-        if (winner && teamStats[winner]) {
-            teamStats[winner].wins++
+    matches.forEach(m => {
+        // Count matches played for team1
+        if (m.team1) {
+            if (!teams[m.team1]) teams[m.team1] = { played: 0, wins: 0, trophies: 0 };
+            teams[m.team1].played++;
         }
-    })
 
-    const teamsArray = Object.entries(teamStats)
+        // Count matches played for team2
+        if (m.team2) {
+            if (!teams[m.team2]) teams[m.team2] = { played: 0, wins: 0, trophies: 0 };
+            teams[m.team2].played++;
+        }
 
-    container.innerHTML = `
-        <div class="teams-page-grid">
-            ${teamsArray.map(([team, stats]) => `
-                <div class="team-page-card">
-                    <h3>${team}</h3>
-                    <p>Matches: ${stats.matches}</p>
-                    <p>Wins: ${stats.wins}</p>
+        // Count wins
+        const winner = m.winner;
+        if (winner && winner !== 'NA' && winner !== 'N') {
+            if (!teams[winner]) teams[winner] = { played: 0, wins: 0, trophies: 0 };
+            teams[winner].wins++;
+        }
+    });
+
+    return teams;
+}
+
+function getTrophies(matches, teams) {
+    const seasonFinals = {};
+
+    matches.forEach(m => {
+        const year = m.match_date.split('-')[0];
+        if (!seasonFinals[year] || m.match_date > seasonFinals[year].match_date) {
+            seasonFinals[year] = m;
+        }
+    });
+
+    Object.values(seasonFinals).forEach(finalMatch => {
+        const winner = finalMatch.winner;
+        if (winner && winner !== 'NA' && teams[winner]) {
+            teams[winner].trophies++;
+        }
+    });
+
+    return teams;
+}
+
+const TEAM_LOGOS = {
+    "Mumbai Indians": "https://upload.wikimedia.org/wikipedia/en/c/cd/Mumbai_Indians_Logo.svg",
+    "Chennai Super Kings": "https://upload.wikimedia.org/wikipedia/en/2/2b/Chennai_Super_Kings_Logo.svg",
+    "Royal Challengers Bangalore": "https://i.pinimg.com/736x/6d/88/2f/6d882fa452b2a58d6860282be5913961.jpg",
+    "Royal Challengers Bengaluru": "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_2020.svg",
+    "Kolkata Knight Riders": "https://upload.wikimedia.org/wikipedia/en/4/4c/Kolkata_Knight_Riders_Logo.svg",
+    "Rajasthan Royals": "https://upload.wikimedia.org/wikipedia/en/6/60/Rajasthan_Royals_Logo.svg",
+    "Delhi Daredevils": "https://upload.wikimedia.org/wikipedia/en/a/a5/Delhi_Capitals_Logo.svg",
+    "Delhi Capitals": "https://upload.wikimedia.org/wikipedia/en/a/a5/Delhi_Capitals_Logo.svg",
+    "Sunrisers Hyderabad": "https://upload.wikimedia.org/wikipedia/en/3/3e/Sunrisers_Hyderabad.svg",
+    "Kings XI Punjab": "https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg",
+    "Punjab Kings": "https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg",
+    "Deccan Chargers": "https://upload.wikimedia.org/wikipedia/en/3/3e/Sunrisers_Hyderabad.svg",
+    "Kochi Tuskers Kerala": "https://upload.wikimedia.org/wikipedia/en/0/0e/Kochi_Tuskers_Kerala_Logo.svg",
+    "Pune Warriors": "https://upload.wikimedia.org/wikipedia/en/5/5e/Pune_Warriors_India_Logo.svg",
+    "Gujarat Lions": "https://upload.wikimedia.org/wikipedia/en/9/99/Gujarat_Lions_Logo.svg",
+    "Rising Pune Supergiants": "https://upload.wikimedia.org/wikipedia/en/e/e1/Rising_Pune_Supergiant_Logo.svg",
+    "Rising Pune Supergiant": "https://upload.wikimedia.org/wikipedia/en/e/e1/Rising_Pune_Supergiant_Logo.svg",
+    "Gujarat Titans": "https://upload.wikimedia.org/wikipedia/en/0/09/Gujarat_Titans_Logo.svg",
+    "Lucknow Super Giants": "https://upload.wikimedia.org/wikipedia/en/l/lb/Lucknow_Super_Giants_Logo.svg",
+};
+
+function renderTeams(teams) {
+    const container = document.getElementById('teams-grid');
+
+    const sortedTeams = Object.entries(teams)
+        .sort((a, b) => b[1].wins - a[1].wins);
+
+    container.innerHTML = sortedTeams.map(([name, stats]) => `
+        <div class="team-card">
+            <div class="team-logo">
+                <img src="${TEAM_LOGOS[name] || ''}" 
+                     alt="${name}" 
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="team-info">
+                <h3>${name}</h3>
+                <div class="team-stats">
+                    <span>🏏 ${stats.played} matches</span>
+                    <span>✅ ${stats.wins} wins</span>
+                    <span>🏆 ${stats.trophies} trophies</span>
                 </div>
-            `).join('')}
+            </div>
         </div>
-    `
+    `).join('');
 }
 
-loadTeamsPage()
-
-
-const toggleBtn = document.getElementById("thm-toggle")
-
-if (toggleBtn) {
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark")
-    }
-
-    toggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark")
-
-        if (document.body.classList.contains("dark")) {
-            localStorage.setItem("theme", "dark")
-        } else {
-            localStorage.setItem("theme", "light")
-        }
-    })
+async function init() {
+    const text = await fetchData();
+    const matches = parseCSV(text);
+    let teams = getTeamStats(matches);
+    teams = getTrophies(matches, teams);
+    renderTeams(teams);
 }
+
+init(); 

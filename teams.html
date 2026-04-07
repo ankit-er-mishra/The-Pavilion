@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teams - IPL Stats Hub</title>
 
-    <link rel="stylesheet" href="teams.css">
+    <link rel="stylesheet" href="index.css">
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -23,7 +23,7 @@
             <li><a href="records.html">RECORDS</a></li>
         </ul>
 
-       
+
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass search-button"></i>
             <input type="text" placeholder="Search Teams..." id="search-input">
@@ -35,10 +35,14 @@
     </nav>
 
     <main>
-        <section>
-            <h2>All Teams</h2>
-            <div id="teams-page-container">Loading...</div>
-        </section>
+        <main>
+            <section class="teams-section">
+                <h2>All IPL Teams</h2>
+                <div id="teams-grid">Loading...</div>
+            </section>
+        </main>
+
+        <script src="teams.js"></script>
     </main>
 
     <footer>
