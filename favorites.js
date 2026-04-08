@@ -41,6 +41,11 @@ document.getElementById('thm-toggle').addEventListener('click', () => {
     icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
 });
 
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('#thm-toggle i').classList.replace('fa-moon', 'fa-sun');
+}
+
 function setupRemove() {
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-btn')) {
