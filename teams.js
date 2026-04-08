@@ -44,19 +44,19 @@ function getTeamStats(matches) {
     const teams = {};
 
     matches.forEach(m => {
-        // Count matches played for team1
+        
         if (m.team1) {
             if (!teams[m.team1]) teams[m.team1] = { played: 0, wins: 0, trophies: 0 };
             teams[m.team1].played++;
         }
 
-        // Count matches played for team2
+        
         if (m.team2) {
             if (!teams[m.team2]) teams[m.team2] = { played: 0, wins: 0, trophies: 0 };
             teams[m.team2].played++;
         }
 
-        // Count wins
+       
         const winner = m.winner;
         if (winner && winner !== 'NA' && winner !== 'N') {
             if (!teams[winner]) teams[winner] = { played: 0, wins: 0, trophies: 0 };
@@ -90,8 +90,8 @@ function getTrophies(matches, teams) {
 const TEAM_LOGOS = {
     "Mumbai Indians": "https://upload.wikimedia.org/wikipedia/en/c/cd/Mumbai_Indians_Logo.svg",
     "Chennai Super Kings": "https://upload.wikimedia.org/wikipedia/en/2/2b/Chennai_Super_Kings_Logo.svg",
-    "Royal Challengers Bangalore": "https://i.pinimg.com/736x/6d/88/2f/6d882fa452b2a58d6860282be5913961.jpg",
-    "Royal Challengers Bengaluru": "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_2020.svg",
+    "Royal Challengers Bangalore": "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_2020.svg",
+"Royal Challengers Bengaluru": "https://upload.wikimedia.org/wikipedia/en/2/2a/Royal_Challengers_Bangalore_2020.svg",
     "Kolkata Knight Riders": "https://upload.wikimedia.org/wikipedia/en/4/4c/Kolkata_Knight_Riders_Logo.svg",
     "Rajasthan Royals": "https://upload.wikimedia.org/wikipedia/en/6/60/Rajasthan_Royals_Logo.svg",
     "Delhi Daredevils": "https://upload.wikimedia.org/wikipedia/en/a/a5/Delhi_Capitals_Logo.svg",
@@ -133,6 +133,23 @@ function renderTeams(teams) {
         </div>
     `).join('');
 }
+
+
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('#thm-toggle i').classList.replace('fa-moon', 'fa-sun');
+}
+
+document.getElementById('thm-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    const icon = document.querySelector('#thm-toggle i');
+    icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+});
 
 async function init() {
     const text = await fetchData();

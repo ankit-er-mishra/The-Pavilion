@@ -6,9 +6,9 @@ async function fetchData() {
     return text;
 }
 
-////
+
 fetchData().then(data => console.log(data));
-////
+
 
 function parseCSV(text) {
     const lines = text.trim().split('\n');
@@ -99,31 +99,31 @@ function getTopPlayers(matches, limit = 5) {
 
 function normalizeTeam(name) {
     const teamMap = {
-        // RCB
+        
         "Royal Challengers Bangalore": "Royal Challengers Bengaluru",
         "Royal Challengers Bengaluru": "Royal Challengers Bengaluru",
 
-        // Punjab
+        
         "Kings XI Punjab": "Punjab Kings",
         "Punjab Kings": "Punjab Kings",
 
-        // Delhi
+        
         "Delhi Daredevils": "Delhi Capitals",
         "Delhi Capitals": "Delhi Capitals",
 
-        // Deccan Chargers → Sunrisers
+        
         "Deccan Chargers": "Sunrisers Hyderabad",
         "Sunrisers Hyderabad": "Sunrisers Hyderabad",
 
-        // Rising Pune
+        
         "Rising Pune Supergiant": "Rising Pune Supergiants",
         "Rising Pune Supergiants": "Rising Pune Supergiants",
 
-        // Gujarat
+        
         "Gujarat Lions": "Gujarat Titans",
         "Gujarat Titans": "Gujarat Titans",
 
-        // Others (same)
+    
         "Mumbai Indians": "Mumbai Indians",
         "Chennai Super Kings": "Chennai Super Kings",
         "Kolkata Knight Riders": "Kolkata Knight Riders",
@@ -155,7 +155,7 @@ function getTopTeams(matches, limit = 5) {
 }
 
 function getTrophies(matches) {
-    // Trophy = winner of the last match of each season
+    
     const seasonFinals = {};
 
     matches.forEach(m => {
@@ -248,14 +248,17 @@ function renderTopTeams(teams, trophies) {
 }
 
 
+
+
 document.getElementById('thm-toggle').addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
     const icon = document.querySelector('#thm-toggle i');
-    if (document.body.classList.contains('dark-mode')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
-    }
+    icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
 });
 
 

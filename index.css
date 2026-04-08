@@ -17,7 +17,7 @@ body.dark-mode {
     --primary: #1a1a2e;
     --secondary: #16213e;
     --accent: #9b59b6;
-    --accent-light: #f39c12;
+    --accent-light: #d89c18;
     --text-primary: #eaeaea;
     --text-secondary: #aaaaaa;
     --card-bg: #1e1e3f;
@@ -41,7 +41,7 @@ body{
 }
 
 .navbar{
-    background: linear-gradient(to left, var(--navbar-bg) 10%, var(--accent-light) 100%);
+    background: linear-gradient(to left, var(--navbar-bg) 30%, var(--accent-light) 100%);
     color: var(--navbar-text);
     display: flex;
     justify-content: space-between;
@@ -56,7 +56,7 @@ body{
 
 .navbar .logo {
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .navbar .nav-links {
@@ -66,7 +66,7 @@ body{
     gap: 2rem;
     list-style: none;
     color: var(--primary);
-    margin-left: 10rem;
+    margin-left: 0rem;
     
 }
 
@@ -101,6 +101,19 @@ body{
 }
 
 .navbar #thm-toggle:hover {
+    transform: scale(1.1);
+}
+
+#fav-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: yellow;
+    margin-right: -20rem;
+}
+
+#fav-btn:hover {
     transform: scale(1.1);
 }
 
@@ -328,7 +341,10 @@ section h2 {
     width: 60px;
     height: 60px;
     object-fit: contain;
+    background-color: var( --primary);
 }
+
+
 
 .team-info h3 {
     font-size: 1rem;
@@ -346,5 +362,284 @@ section h2 {
 }
 
 
+/* Players Page */
+.players-section {
+    margin: 30px 20px;
+}
+
+.players-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.search-bar {
+    margin-bottom: 16px;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.search-bar input:focus {
+    border-color: var(--accent);
+}
+
+#players-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-rank {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 40px;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+}
+
+.player-teams {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.player-awards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.award-count {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-light);
+}
+
+.award-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.no-results {
+    color: var(--text-secondary);
+    padding: 20px;
+    text-align: center;
+}
+
+.fav-toggle {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #bbb;
+    transition: all 0.2s ease;
+}
+
+.fav-toggle:hover {
+    transform: scale(1.2);
+    color: #ffcc00;
+}
+
+.fav-toggle.active {
+    color: gold;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.7);
+}
+
+#favorites-popup {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 250px;
+    max-height: 250px;
+    overflow-y: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 2000;
+}
+
+.hidden {
+    display: none;
+}
+
+.favorite-item {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.favorite-item:last-child {
+    border-bottom: none;
+}
+
+#toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    z-index: 3000;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.5);
+    z-index: 5000;
+
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.3s;
+}
 
 
+#player-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.player-avatar img {
+    width: 50px;      
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+    height: auto;
+    text-align: center;
+    position: relative;
+}
+
+.modal-avatar {
+    width: 80px;
+    height: 80px;
+    background: purple;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+#close-modal {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.modal-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+}
+
+.modal-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-fallback {
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+
+#favorites-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #ff4d4d;
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    transform: scale(1.2);
+}
+
+.favorites-section {
+    padding-top: 70px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

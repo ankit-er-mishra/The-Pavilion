@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Players - IPL Stats Hub</title>
 
-    <link rel="stylesheet" href="players.css">
-
-
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <h1 class="logo">THE PAVILION</h1>
 
-        <ul class="nav-links">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="teams.html">TEAMS</a></li>
-            <li class="active"><a href="players.html">PLAYERS</a></li>
-            <li><a href="records.html">RECORDS</a></li>
-        </ul>
+<nav class="navbar">
+    <h1 class="logo">THE PAVILION</h1>
 
-       
-        <div class="search-container">
-            <i class="fa-solid fa-magnifying-glass search-button"></i>
-            <input type="text" placeholder="Search Players..." id="search-input">
+    <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="teams.html">TEAMS</a></li>
+        <li class="active"><a href="players.html">PLAYERS</a></li>
+        <li><a href="Favorites.html">MY FAVORITES</a></li>
+    </ul>
+
+    <button id="thm-toggle">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</nav>
+
+<main>
+    <section class="players-section">
+        <h2>Top Players</h2>
+
+        <div class="search-bar">
+            <input type="text" id="player-search" placeholder="Search player...">
         </div>
 
-       
-        <button id="thm-toggle">
-            <i class="fa-solid fa-moon"></i>
-        </button>
-    </nav>
+        <div id="players-grid">Loading...</div>
+    </section>
+</main>
 
-    <main>
-        <section>
-            <h2>Top Players</h2>
-            <div id="players-page-container">Loading...</div>
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; The Pavilion</p>
-    </footer>
+<div id="player-modal" class="hidden">
+    <div class="modal-content">
+        <span id="close-modal">&times;</span>
 
-    <script src="players.js"></script>
+        <div id="modal-avatar" class="modal-avatar"></div>
+
+        <h2 id="modal-name"></h2>
+        <p id="modal-teams"></p>
+        <p id="modal-awards"></p>
+    </div>
+</div>
+
+
+<div id="toast"></div>
+
+<footer>
+    <p>&copy; The Pavilion</p>
+</footer>
+
+<script src="players.js"></script>
+
 </body>
-
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites - IPL Stats Hub</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h1 class="logo">THE PAVILION</h1>
+    <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="teams.html">TEAMS</a></li>
+        <li><a href="players.html">PLAYERS</a></li>
+        <li class="active"><a href="favorites.html">MY FAVORITES</a></li>
+    </ul>
+    <button id="thm-toggle">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+</nav>
+
+<main>
+    <section class="favorites-section">
+        <h2>My Favorite Players</h2>
+        <div id="favorites-grid">Loading your stars...</div>
+    </section>
+</main>
+
+<div id="toast"></div>
+
+<footer>
+    <p>© The Pavilion</p>
+</footer>
+
+<script src="favorites.js"></script>
+</body>
+</html>
