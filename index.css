@@ -643,3 +643,31 @@ section h2 {
     flex-direction: column;
     align-items: center;
 }
+
+#favorites-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: red;
+}
+
+.modal-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.modal-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
