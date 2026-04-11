@@ -68,6 +68,7 @@ const playerImages = {
     "A Nehra": "https://s.ndtvimg.com/images/entities/300/ashish-nehra-324.png",
     "BJ Hodge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN0Z15b-fP_23Jr5GTWnsUAF_FzkozrxBnrA&s",
     "Ishan Kishan": "https://brightcove.iplt20.com/output/input/6389344563112-1771243834.jpg",
+    "JM Bairstow": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8U_xocK_mRg3j_g5qNMAh6765Bz_TSdnnbQ&s"
 
 };
 
