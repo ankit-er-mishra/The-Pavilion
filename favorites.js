@@ -103,7 +103,7 @@ menuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('show');
 });
 
-// ✅ PARSE CSV
+
 function parseCSV(text) {
     const lines = text.trim().split('\n');
     const headers = lines[0].split(',');
@@ -131,7 +131,7 @@ function parseCSV(text) {
     return matches;
 }
 
-// ✅ GET PLAYER STATS
+
 function getPlayerStats(matches) {
     const players = {};
 
@@ -161,12 +161,12 @@ function getPlayerStats(matches) {
     }));
 }
 
-// ✅ GET FAVORITES
+
 function getFavorites() {
     return JSON.parse(localStorage.getItem('favorites')) || [];
 }
 
-// ✅ TOAST
+
 function showToast(msg) {
     const toast = document.getElementById('toast');
     if (!toast) return;
@@ -179,7 +179,7 @@ function showToast(msg) {
     }, 2000);
 }
 
-// ✅ RENDER FAVORITES
+
 function renderFavorites(allPlayers) {
     const container = document.getElementById('favorites-grid');
     const favorites = getFavorites();
@@ -210,7 +210,7 @@ function renderFavorites(allPlayers) {
     `).join('');
 }
 
-// ✅ REMOVE FAVORITE
+
 function setupRemove(allPlayers) {
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove-btn')) {
@@ -232,7 +232,7 @@ function setupPlayerClick() {
 
     document.addEventListener('click', (e) => {
 
-        // ❌ don't trigger on remove button
+       
         if (e.target.classList.contains('remove-btn')) return;
 
         const card = e.target.closest('.player-card');
@@ -259,12 +259,12 @@ function setupPlayerClick() {
         modal.classList.remove('hidden');
     });
 
-    // close button
+    
     document.getElementById('close-modal').addEventListener('click', () => {
         modal.classList.add('hidden');
     });
 
-    // click outside
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.add('hidden');
@@ -272,7 +272,7 @@ function setupPlayerClick() {
     });
 }
 
-// ✅ INIT
+
 async function init() {
     try {
         const text = await fetchData();

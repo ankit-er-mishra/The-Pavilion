@@ -754,7 +754,7 @@ section h2 {
     color: var(--text-secondary);
 }
 
-/* Hide menu toggle on desktop */
+
 #menu-toggle {
     display: none;
     font-size: 1.4rem;
@@ -764,7 +764,7 @@ section h2 {
     color: var(--navbar-text);
 }
 
-/* Mobile styles */
+
 @media (max-width: 768px) {
 
     .navbar {
