@@ -1,14 +1,14 @@
 # The Pavilion 🏏
 
 A web application to explore IPL cricket statistics using real match data (2008–2025).  
-It provides insights into player performance, team records, and all-time IPL statistics.
+It provides insights into player performance, team records, and personalized favorites.
 
 ---
 
 ## Purpose 🎯
 
 The Pavilion allows users to explore IPL data in a clean and interactive interface.  
-Users can view top players, team performance, and important IPL records based on real match data.
+Users can view top players, team performance, and mark their favorite players.
 
 ---
 
@@ -31,12 +31,8 @@ https://github.com/ritesh-ojha/IPL-DATASET
 - 🏏 Top Players (based on Player of Match awards)
 - 🏆 Top Teams (based on total wins)
 - 📋 Teams Page (matches played + wins)
-- ⭐ Players Page (top performers)
-- 📈 Records Page:
-  - Most Wins Team  
-  - Most Player of Match  
-  - Most Matches Venue  
-  - Most Matches Played (Team)  
+- ⭐ Players Page (search + ranking + modal view)
+- ❤️ Favorites Page (save players using Local Storage)
 - 🌙 Dark / Light Mode  
 - ⚡ Data caching using Local Storage  
 - 📱 Fully responsive design  
@@ -52,17 +48,13 @@ https://github.com/ritesh-ojha/IPL-DATASET
 - Array Higher-Order Functions:
   - map  
   - filter  
-  - sort  
-  - reduce  
+  - sort   
 
 ---
 
 ## 🚀 How to Run
 
 1. Clone the repository  
-   ```
-   git clone https://github.com/ankit-er-mishra/The-Pavilion.git
-   ```
 
 2. Open `index.html` in your browser  
 
@@ -72,7 +64,8 @@ https://github.com/ritesh-ojha/IPL-DATASET
 
 - ✅ Milestone 1: Completed  
 - ✅ Milestone 2: API Integration Completed  
-- 🔜 Milestone 3: Interactivity (Search, Filter, Sort)
+- ✅ Milestone 3: Core Features Implemented  
+- ✅ Milestone 4: Completed the Project
 
 ---
 
