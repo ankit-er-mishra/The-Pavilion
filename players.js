@@ -96,13 +96,6 @@ function normalizeTeam(team) {
     return teamMap[team] || team;
 }
 
-const menuBtn = document.getElementById('menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-});
-
 function parseCSV(text) {
     const lines = text.trim().split('\n');
     const headers = lines[0].split(',');
@@ -164,7 +157,7 @@ function getPlayerStats(matches) {
         }))
         .sort((a, b) => b.awards - a.awards);
 
-    // ✅ ADD FIX HERE (assign fixed rank)
+   
     sorted.forEach((player, index) => {
         player.rank = index + 1;
     });

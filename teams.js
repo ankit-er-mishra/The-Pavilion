@@ -30,13 +30,6 @@ function normalizeTeam(team) {
     return teamMap[team] || team;
 }
 
-const menuBtn = document.getElementById('menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-});
-
 function parseCSV(text) {
     const lines = text.trim().split('\n');
     const headers = lines[0].split(',');
@@ -133,7 +126,7 @@ const TEAM_LOGOS = {
     "Kings XI Punjab": "https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg",
     "Punjab Kings": "https://upload.wikimedia.org/wikipedia/en/d/d4/Punjab_Kings_Logo.svg",
     "Deccan Chargers": "https://upload.wikimedia.org/wikipedia/en/3/3e/Sunrisers_Hyderabad.svg",
-    "Kochi Tuskers Kerala": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBOW73hwZXHxOhsz8ocrdS0h-9GEs7ixyIJQ&s",
+    "Kochi Tuskers Kerala": "https://upload.wikimedia.org/wikipedia/en/0/0e/Kochi_Tuskers_Kerala_Logo.svg",
     "Pune Warriors": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBCUSJDKEIPn94z4av5G-pZmz76GzTekUdEA&s",
     "Gujarat Lions": "https://upload.wikimedia.org/wikipedia/hi/b/bf/%E0%A4%97%E0%A5%81%E0%A4%9C%E0%A4%B0%E0%A4%BE%E0%A4%A4_%E0%A4%B2%E0%A5%89%E0%A4%AF%E0%A4%A8%E0%A5%8D%E0%A4%B8_%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B.png",
     "Rising Pune Supergiants": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXNa2fi6KhtnKBIlb2dZw_varZK8ClQF3DeA&s",
